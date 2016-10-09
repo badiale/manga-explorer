@@ -1,0 +1,34 @@
+{
+  "name": "manga-explorer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server-compiled/index.js",
+  "scripts": {
+    "lint-server": "eslint --fix server/**/*.js",
+    "babel-server": "babel server -d server-compiled",
+    "start": "npm run lint-server && npm run babel-server && node server-compiled/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/badiale/manga-explorer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/badiale/manga-explorer/issues"
+  },
+  "homepage": "https://github.com/badiale/manga-explorer#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-eslint": "^7.0.0",
+    "babel-preset-latest": "^6.16.0",
+    "eslint": "^3.7.1",
+    "eslint-plugin-react": "^6.4.0",
+    "standard": "^8.3.0"
+  }
+}
