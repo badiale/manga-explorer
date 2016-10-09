@@ -5,7 +5,7 @@
   "main": "server-compiled/index.js",
   "scripts": {
     "lint-server": "eslint --fix server/**/*.js",
-    "babel-server": "babel server -d server-compiled",
+    "babel-server": "babel ./**/*.es6 -d ./",
     "start": "npm run lint-server && npm run babel-server && node server-compiled/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

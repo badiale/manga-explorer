@@ -40,4 +40,5 @@ jspm_packages
 .idea
 
 #es6
-server-compiled
+server/**/*.js
+lib/**/*.js
