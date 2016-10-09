@@ -2,11 +2,11 @@
   "name": "manga-explorer",
   "version": "1.0.0",
   "description": "",
-  "main": "server-compiled/index.js",
+  "main": "server/index.js",
   "scripts": {
-    "lint-server": "eslint --fix server/**/*.js",
-    "babel-server": "babel ./**/*.es6 -d ./",
-    "start": "npm run lint-server && npm run babel-server && node server-compiled/index.js",
+    "lint": "eslint --fix {server,lib}/**/*.es6",
+    "babel": "babel {server,lib}/**/*.es6 -d ./",
+    "start": "npm run lint && npm run babel && node server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
