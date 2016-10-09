@@ -1,5 +1,5 @@
-import MangaSource from "./MangaSource"
+import MangaReaderSource from "./mangaReader/MangaReaderSource";
 
 export default {
-  MANGA_READER: new MangaSource("MangaReader")
-}
+  MANGA_READER: MangaReaderSource
+};

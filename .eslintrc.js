@@ -16,6 +16,7 @@ module.exports = {
   ],
   "rules": {
     "no-console": "off",
-    "quotes": [ "warn", "double" ]
+    "quotes": [ "warn", "double" ],
+    "semi": [ "error", "always" ]
   }
 };
