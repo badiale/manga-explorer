@@ -21,17 +21,13 @@ class MangaReaderSource extends MangaSource {
 
   getChapters (manga) {
     let baseUrl = url.resolve("http://www.mangareader.net/", manga);
-    console.log(manga, baseUrl);
     return fetch(baseUrl).then(($) => {
-      console.log("here");
-      var collection = $("#listing").find("tr.table_head ~ tr");
-      console.log(manga, baseUrl, collection.size());
-      return _.map(collection, (line) => {
+      return _.map($("#listing").find("tr.table_head ~ tr"), (line) => {
         var $line = $(line);
         return {
-          text: $line.find("td:nth-child(2)").text().trim(),
+          text: $line.find("td:nth-child(1)").text().trim(),
           link: url.resolve(baseUrl, $line.find("a").attr("href")),
-          added: $line.find("td:last").text().trim()
+          added: $line.find("td:nth-child(2)").text().trim()
         };
       });
     });
