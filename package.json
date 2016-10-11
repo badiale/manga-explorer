@@ -4,9 +4,9 @@
   "description": "",
   "main": "bin/server/index.js",
   "scripts": {
-    "lint": "eslint --fix {server,lib}/**/*.es6",
-    "build": "babel {server,lib}/**/*.es6 -d ./bin",
-    "start": "nodemon --exec \"npm run lint && babel-node server/index.es6\"",
+    "lint": "eslint --fix {server,lib}/**/*.js",
+    "build": "babel {server,lib}/**/*.js -d ./bin",
+    "start": "nodemon --exec \"npm run lint && babel-node server/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
