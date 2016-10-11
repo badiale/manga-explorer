@@ -2,11 +2,11 @@
   "name": "manga-explorer",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "bin/server/index.js",
   "scripts": {
     "lint": "eslint --fix {server,lib}/**/*.es6",
-    "babel": "babel {server,lib}/**/*.es6 -d ./",
-    "start": "npm run lint && npm run babel && node server/index.js",
+    "build": "babel {server,lib}/**/*.es6 -d ./bin",
+    "start": "nodemon --exec \"npm run lint && babel-node server/index.es6\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "babel-preset-latest": "^6.16.0",
     "eslint": "^3.7.1",
     "eslint-plugin-react": "^6.4.0",
+    "nodemon": "^1.11.0",
     "standard": "^8.3.0"
   }
 }
