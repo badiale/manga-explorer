@@ -13,14 +13,17 @@ app.get("/", function (req, res) {
 Object.keys(MangaSources).forEach(function (key) {
   let mangaSource = MangaSources[ key ];
   let baseUrl = url.resolve("/", mangaSource.name);
+  let mangaApp = express();
 
-  app.get(baseUrl, function (req, res) {
+  mangaApp.get("/", function (req, res) {
     mangaSource.getMangas().then(mangas => res.send(mangas), (message) => res.status(500).send(message));
   });
 
-  app.get("/" + mangaSource.name + "/:manga", function (req, res) {
+  mangaApp.get("/:manga", function (req, res) {
     mangaSource.getChapters(req.params.manga).then(chapters => res.send(chapters), (message) => res.status(500).send(message));
   });
+
+  app.use(baseUrl, mangaApp);
 });
 
 app.listen(PORT, function () {
