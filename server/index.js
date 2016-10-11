@@ -23,6 +23,10 @@ Object.keys(MangaSources).forEach(function (key) {
     mangaSource.getChapters(req.params.manga).then(chapters => res.send(chapters), (message) => res.status(500).send(message));
   });
 
+  mangaApp.get("/:manga/:chapter", function (req, res) {
+    mangaSource.getPages(req.params.manga, req.params.chapter).then(pages => res.send(pages), (message) => res.status(500).send(message));
+  });
+
   app.use(baseUrl, mangaApp);
 });
 
