@@ -29,7 +29,10 @@ Object.keys(MangaSources).forEach(function (key) {
 
   function promiseRequest(callback) {
     return function (req, res) {
-      callback(req, res).then(result => res.send(result), (message) => res.status(500).send(message));
+      callback(req, res).then(result => res.send(result), message => {
+        console.error(res, message);
+        res.status(500).send(message);
+      });
     };
   }
 
