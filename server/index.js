@@ -15,17 +15,23 @@ Object.keys(MangaSources).forEach(function (key) {
   let baseUrl = url.resolve("/", mangaSource.name);
   let mangaApp = express();
 
-  mangaApp.get("/", function (req, res) {
-    mangaSource.getMangas().then(mangas => res.send(mangas), (message) => res.status(500).send(message));
-  });
+  mangaApp.get("/", promiseRequest(function () {
+    return mangaSource.getMangas();
+  }));
 
-  mangaApp.get("/:manga", function (req, res) {
-    mangaSource.getChapters(req.params.manga).then(chapters => res.send(chapters), (message) => res.status(500).send(message));
-  });
+  mangaApp.get("/:manga", promiseRequest(function (req) {
+    return mangaSource.getChapters(req.params.manga);
+  }));
 
-  mangaApp.get("/:manga/:chapter", function (req, res) {
-    mangaSource.getPages(req.params.manga, req.params.chapter).then(pages => res.send(pages), (message) => res.status(500).send(message));
-  });
+  mangaApp.get("/:manga/:chapter", promiseRequest(function (req) {
+    return mangaSource.getPages(req.params.manga, req.params.chapter);
+  }));
+
+  function promiseRequest(callback) {
+    return function (req, res) {
+      callback(req, res).then(result => res.send(result), (message) => res.status(500).send(message));
+    };
+  }
 
   app.use(baseUrl, mangaApp);
 });
