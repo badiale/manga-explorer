@@ -1,5 +1,6 @@
 import _ from "lodash";
 import express from "express";
+import logger from "../lib/logger";
 import MangaSources from "../lib/MangaSources";
 import mangaSourceUrl from "./mangaSourceUrl";
 import mangaSourceRouter from "./mangaSourceRouter";
@@ -15,7 +16,7 @@ routeMangaSources();
 
 app.use(requestLogger.stop);
 app.listen(PORT, function () {
-  console.log(`Server started on port ${PORT}!`);
+  logger.info(`Server started on port ${PORT}!`);
 });
 
 function availableMangaSources (req, res, next) {

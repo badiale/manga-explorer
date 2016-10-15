@@ -1,4 +1,5 @@
 import express from "express";
+import logger from "../lib/logger";
 
 export default function mangaSourceRouter (mangaSource) {
   let app = express();
@@ -21,7 +22,7 @@ export default function mangaSourceRouter (mangaSource) {
         res.send(result);
         next();
       }, message => {
-        console.error(res, message);
+        logger.error(req.ip, req.originalUrl, message);
         res.status(500).send(message);
         next();
       });

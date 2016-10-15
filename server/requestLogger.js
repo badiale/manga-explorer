@@ -1,3 +1,5 @@
+import logger from "../lib/logger";
+
 export default {start, stop};
 
 function start(req, res, next) {
@@ -6,6 +8,6 @@ function start(req, res, next) {
 }
 
 function stop(req, res, next) {
-  console.log(res.statusCode, req.ip, req.originalUrl, Date.now() - req.requestTime);
+  logger.info(res.statusCode, req.ip, req.originalUrl, Date.now() - req.requestTime);
   next();
 }
