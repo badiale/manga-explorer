@@ -1,18 +1,30 @@
 import express from "express";
+import _ from "lodash";
+import mangaSourceUrl from "./mangaSourceUrl";
 
 export default function mangaSourceRouter (mangaSource) {
   let app = express();
 
   app.get("/", promiseRequest(function () {
-    return mangaSource.getMangas();
+    return mangaSource.getMangas().then(mangas => {
+      return _.map(mangas, manga => {
+        manga.link = mangaSourceUrl(mangaSource) + "/" + manga.code;
+        return manga;
+      });
+    });
   }));
 
   app.get("/:manga", promiseRequest(function (req) {
-    return mangaSource.getChapters(req.params.manga);
+    return mangaSource.getChapters(req.params.manga).then(chapters => {
+      return _.map(chapters, chapter => {
+        chapter.link = mangaSourceUrl(mangaSource) + "/chapter/" + chapter.code;
+        return chapter;
+      });
+    });
   }));
 
-  app.get("/:manga/:chapter", promiseRequest(function (req) {
-    return mangaSource.getPages(req.params.manga, req.params.chapter);
+  app.get("/chapter/:chapter", promiseRequest(function (req) {
+    return mangaSource.getPages(req.params.chapter);
   }));
 
   function promiseRequest (callback) {
