@@ -1,6 +1,6 @@
 import express from "express";
 
-export default function mangaSourceRouter(mangaSource) {
+export default function mangaSourceRouter (mangaSource) {
   let app = express();
 
   app.get("/", promiseRequest(function () {
@@ -15,11 +15,15 @@ export default function mangaSourceRouter(mangaSource) {
     return mangaSource.getPages(req.params.manga, req.params.chapter);
   }));
 
-  function promiseRequest(callback) {
-    return function (req, res) {
-      callback(req, res).then(result => res.send(result), message => {
+  function promiseRequest (callback) {
+    return function (req, res, next) {
+      callback(req, res).then(result => {
+        res.send(result);
+        next();
+      }, message => {
         console.error(res, message);
         res.status(500).send(message);
+        next();
       });
     };
   }
