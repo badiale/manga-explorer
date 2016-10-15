@@ -9,12 +9,12 @@ import requestLogger from "./requestLogger";
 let PORT = process.env.PORT || 8100;
 let app = express();
 
-app.use(requestLogger.start);
+app.use(requestLogger.begin);
 app.get("/", availableMangaSources);
-
 routeMangaSources();
+app.use(requestLogger.end);
+app.use(requestLogger.error);
 
-app.use(requestLogger.stop);
 app.listen(PORT, function () {
   logger.info(`Server started on port ${PORT}!`);
 });
