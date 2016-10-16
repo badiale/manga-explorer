@@ -29,10 +29,13 @@ export default function mangaSourceRouter (mangaSource) {
 
   function promiseRequest (callback) {
     return function (req, res, next) {
+      res.type("json");
       callback(req, res).then(result => {
         res.send(result);
         next();
-      }, next);
+      }, next, part => {
+        res.write(part);
+      });
     };
   }
 
