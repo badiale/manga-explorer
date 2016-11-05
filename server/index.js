@@ -15,7 +15,7 @@ routeMangaSources();
 app.use(requestLogger.end);
 app.use(requestLogger.error);
 
-app.listen(PORT, function () {
+app.listen(PORT, "0.0.0.0", function () {
   logger.info(`Server started on port ${PORT}!`);
 });
 
